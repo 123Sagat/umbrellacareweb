@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { getDocs, collection,doc } from "firebase/firestore";
+import { firestore } from "./firebaseConfig";
 import "./AvailablePage.css";
 
-const AvailableaPage = () => {
+const AvailablePage = () => {
   const navigate = useNavigate();
+
   const handleHomeClick = () => {
     navigate("/dashboard");
   };
@@ -25,17 +27,38 @@ const AvailableaPage = () => {
   const handleUserReviewsClick = () => {
     navigate("/user");
   };
+
   const handleClickdoctor = () => {
     navigate("/doctor");
   };
 
-  const [count] = useState("89");
+  const [doctors, setDoctors] = useState([]);
+  const fetchDoctors = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(firestore, "doctors"));
+      const doctorData = querySnapshot.docs.map((doc) => ({
+        id:doc.id,
+        ...doc.data()
+        //console.log(id+"cool nitu")
+      }));
+      //console.log(doc.id+ "cool nitu");
+      setDoctors(doctorData);
+
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchDoctors();
+  }, []);
+  
   return (
     <div className='container5'>
       <h5>Hospital Administration Centre</h5>
       <div className='search-container'>
         <input type='text' className='search-input' placeholder='Search' />
-        <button className='search-button'aria-label="Search through site content"></button>
+        <button className='search-button' aria-label='Search through site content'></button>
       </div>
 
       <div className='deeper1'></div>
@@ -71,144 +94,33 @@ const AvailableaPage = () => {
       <div className='available'>
         <br />
         <text5>
-          AvailableDoctor<b>{count}</b>
+          AvailableDoctor<b>{doctors.length}</b>
         </text5>
-        <div class='scrollable-div'>
-          <div className='available1'>
-            <img src={"hx_4 1.png"} alt='Description of the image' />
-            <span>sample pokhrel</span>
-            <p>anesthesiology</p>
-            <text>MBBS, FCPS, FICS (USA)</text>
-            <text1>4.5</text1>
-            <Link
-              to='/click'
-              style={{ top: "190px", left: "295px" }}
-              className='link'
-            >
-              sun-fri
-            </Link>
-            <Link to='/click' className='link'>
-              10:00 am to 1:00 pm
-            </Link>
-            <img
-              className='image1'
-              src={"Star 1.png"}
-              alt='Description of the image'
-            />
-          </div>
-          <div className='available2'>
-            <img src={"hx_4 1.png"} alt='Description of the image' />
-            <span>sample pokhrel</span>
-            <p>anesthesiology</p>
-            <text>MBBS, FCPS, FICS (USA)</text>
-            <text1>4.5</text1>
-            <Link
-              to='/click'
-              style={{ top: "190px", left: "295px" }}
-              className='link'
-            >
-              sun-fri
-            </Link>
-            <Link to='/click' className='link'>
-              10:00 am to 1:00 pm
-            </Link>
-            <img
-              className='image1'
-              src={"Star 1.png"}
-              alt='Description of the image'
-            />
-          </div>
-          <div className='available3'>
-            <img src={"hx_4 1.png"} alt='Description of the image' />
-            <span>sample pokhrel</span>
-            <p>anesthesiology</p>
-            <text>MBBS, FCPS, FICS (USA)</text>
-            <text1>4.5</text1>
-            <Link
-              to='/click'
-              style={{ top: "190px", left: "295px" }}
-              className='link'
-            >
-              sun-fri
-            </Link>
-            <Link to='/click' className='link'>
-              10:00 am to 1:00 pm
-            </Link>
-            <img
-              className='image1'
-              src={"Star 1.png"}
-              alt='Description of the image'
-            />
-          </div>
-          <div className='available4'>
-            <img src={"hx_4 1.png"} alt='Description of the image' />
-            <span>sample pokhrel</span>
-            <p>anesthesiology</p>
-            <text>MBBS, FCPS, FICS (USA)</text>
-            <text1>4.5</text1>
-            <Link
-              to='/click'
-              style={{ top: "190px", left: "295px" }}
-              className='link'
-            >
-              sun-fri
-            </Link>
-            <Link to='/click' className='link'>
-              10:00 am to 1:00 pm
-            </Link>
-            <img
-              className='image1'
-              src={"Star 1.png"}
-              alt='Description of the image'
-            />
-          </div>
-          <div className='available5'>
-            <img src={"hx_4 1.png"} alt='Description of the image' />
-            <span>sample pokhrel</span>
-            <p>anesthesiology</p>
-            <text>MBBS, FCPS, FICS (USA)</text>
-            <text1>4.5</text1>
-            <Link
-              to='/click'
-              style={{ top: "190px", left: "295px" }}
-              className='link'
-            >
-              sun-fri
-            </Link>
-            <Link to='/click' className='link'>
-              10:00 am to 1:00 pm
-            </Link>
-            <img
-              className='image1'
-              src={"Star 1.png"}
-              alt='Description of the image'
-            />
-          </div>
-          <div className='available6'>
-            <img src={"hx_4 1.png"} alt='Description of the image' />
-            <span>sample pokhrel</span>
-            <p>anesthesiology</p>
-            <text>MBBS, FCPS, FICS (USA)</text>
-            <text1>4.5</text1>
-            <Link
-              to='/click'
-              style={{ top: "190px", left: "295px" }}
-              className='link'
-            >
-              sun-fri
-            </Link>
-            <Link to='/click' className='link'>
-              10:00 am to 1:00 pm
-            </Link>
-            <img
-              className='image1'
-              src={"Star 1.png"}
-              alt='Description of the image'
-            />
-          </div>
+        <div className='scrollable-div'>
+          {doctors.map((doctor, index) => (
+            <div className='doctor-card' key={index}>
+              <img src={"hx_4 1.png"} alt='Description of the image' />
+              <span>{doctor.name}</span>
+              <p>{doctor.specialization}</p>
+              <text>{doctor.qualification}</text>
+              <text1>{doctor.rating}</text1>
+              <Link to={`/click?a=${doctor.id}`} style={{ top: "190px", left: "295px" }} className='link'>
+                sun-fri
+              </Link>
+              <Link to='/click' className='link'>
+                10:00 am to 1:00 pm
+              </Link>
+              <img
+                className='image1'
+                src={"Star 1.png"}
+                alt='Description of the image'
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
-export default AvailableaPage;
+
+export default AvailablePage;

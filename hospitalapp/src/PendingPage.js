@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./AvailablePage.css";
+import "./UserPage.css";
 const PendingPage = () => {
   const navigate = useNavigate();
   const handleHomeClick = () => {
@@ -55,7 +55,7 @@ const PendingPage = () => {
           <button className="button6" onClick={handleClickdoctor}>Doctor Records</button>
       </div>
         <div className='pending'>
-        <text9 style={{ marginLeft: "100px", Top: "200px" }}>
+        <text9 style={{ marginLeft: "100px" }}>
           Total Doctor<b>{count}</b>
         </text9>
           <div className='pending1'>

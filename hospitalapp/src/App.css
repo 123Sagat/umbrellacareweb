@@ -1,4 +1,4 @@
-.container {
+ .container {
   display: flex;
   justify-content: flex-start;
   box-sizing: border-box;
@@ -95,7 +95,7 @@ h1{
   line-height: 19px;
   /* identical to box height */
 
-  text-emphasis-color: #7a2caa;
+   text-emphasis-color: #7a2caa;
   border: none;
   border-bottom: 1px solid black;
   outline: none;
@@ -180,11 +180,4 @@ h15{
   
   color: #FFFFFF;
 }
-
-
-
-
-
-
-
 
