@@ -7,18 +7,30 @@ import "./AvailablePage.css";
 const ClickonuserreviewPage = () => {
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
+  const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const doctorsSnapshot = await getDocs(collection(firestore, "doctors"));
+        const doctorsData = doctorsSnapshot.docs.map((doc) => doc.data());
+        setDoctors(doctorsData);
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      }
+    };
+
     const fetchReviews = async () => {
       try {
-        const querySnapshot = await getDocs(collection(firestore, "reviews"));
-        const reviewsData = querySnapshot.docs.map((doc) => doc.data());
+        const reviewsSnapshot = await getDocs(collection(firestore, "reviews"));
+        const reviewsData = reviewsSnapshot.docs.map((doc) => doc.data());
         setReviews(reviewsData);
       } catch (error) {
         console.error("Error fetching reviews:", error);
       }
     };
 
+    fetchDoctors();
     fetchReviews();
   }, []);
 
@@ -136,6 +148,17 @@ const ClickonuserreviewPage = () => {
             <div className={`border${index + 1}`}></div>
           </div>
         ))}
+        <div className="doctor-list">
+          <h2>Available Doctors</h2>
+          {doctors.map((doctor, index) => (
+            <div key={index}>
+              <h3>{doctor.name}</h3>
+              <p>Specialization: {doctor.specialization}</p>
+              <p>Qualification: {doctor.qualification}</p>
+              <p>Rating: {doctor.rating}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

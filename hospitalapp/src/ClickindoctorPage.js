@@ -9,9 +9,8 @@ const ClickinDoctorPage = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const doctorId= params.get('a');
-console.log(doctorId);
+  console.log('a');
   const navigate = useNavigate();
-  //const { doctorId } = useParams();
   const [selectedButtons, setSelectedButtons] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -94,13 +93,10 @@ console.log(doctorId);
       console.error("Error saving booking:", error);
     }
   };
- 
 
-  //fetch doctorinfo from firebase
   useEffect(() => {
     const fetchDoctorInfo = async () => {
       try {
-        console.log(doctorId+ '/////////////////');
         const docRef = doc(firestore, "doctors", doctorId); // Replace "test" with the actual collection name
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
@@ -116,9 +112,6 @@ console.log(doctorId);
 
     fetchDoctorInfo();
   }, [doctorId]);
-
-
-
 
   useEffect(() => {
     const fetchAppointmentTimes = async () => {

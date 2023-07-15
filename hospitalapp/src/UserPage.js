@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link,useNavigate } from 'react-router-dom';
-import "./AvailablePage";
+import "./UserPage.css";
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -26,8 +26,7 @@ const UserPage = () => {
   const handleClickdoctor = () => {
     navigate("/doctor");
   };
-
-
+  
   const [count] = useState("674");
 
   return (
